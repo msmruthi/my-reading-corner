@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!-- Website design layout created with the help of ChatGPT (OpenAI)-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fav Lines &rarr; Book Recs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-100 min-h-screen flex flex-col items-center">
+  <div id="spoiler-overlay" class="fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center text-center z-50">
+    <h2 class="text-3xl text-white font-bold mb-4">⚠️ Spoiler Warning</h2>
+    <p class="text-lg text-gray-200 max-w-md mb-6 px-4">
+      This page contains lines from books I like. I have avoided using lines that reveal any plot points but there still might be some spoilers.  
+      So only proceed if you're okay with seeing them!
+    </p>
+    <button id="enter-btn" class="bg-white text-black font-semibold px-6 py-3 rounded-lg shadow hover:bg-gray-200">
+      I Understand — Show Me
+    </button>
+  </div>
+  <h1 class="text-3xl font-bold my-6">If These Lines Speak to You... This Book Might Be For You</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 w-full max-w-7xl">
+    <!-- Tiles injected here -->
+  </div>
+
+  <footer class="fixed bottom-0 left-0 w-full bg-gray-800 text-white text-center text-sm p-2">
+    Book cover images are the property of their respective publishers and authors. 
+    All covers displayed here were sourced from 
+    <a href="https://www.goodreads.com/" target="_blank" class="underline hover:text-gray-700">Goodreads</a> 
+    for non-commercial, educational purposes.
+  </footer>
+
+  <script>
+    const data = [
+      {
+        quotes: [
+          "“Isn’t it nice when you can just sit in comfortable silence with someone?” he says, after no more than nine wordless seconds.",
+          "You didn’t friendzone me. That makes it sound like only being your friend is a demotion, somehow. As if it’s not my favorite thing to be.",
+          "I’m a long way from where I want to be, but I am on my way.",
+          "It is fundamentally against my morals to tell a man he’s funny. For starters, he might believe it. And if he does? He might take it upon himself to try stand-up comedy.",
+          "The number-one rule of party planning in your mid-twenties is to organize things at least six weeks in advance in order to optimize attendance.",
+          "It is a truth universally acknowledged that every man looks fitter when he leans; against walls, counters, or, god forbid, doorframes."
+        ],
+        title: "The Friendship Fling by Georgia Stone",
+        cover: "images/quotes-grid/the_friendship_fling.jpg",
+        url: "https://www.goodreads.com/book/show/218680615-the-friendship-fling"
+      },
+      {
+        quotes: [
+          "We turn pain into a story, because then it has a purpose. Then, we reason, there was a point to it all along. But sometimes pain is just pain, and there’s nothing particularly noble about clinging to it.",
+          "When you’re so widely known and loved, so soaked in glory you’re swimming in it, all you have to worry about is maintenance, not metamorphosis.",
+          "Success is only meant to be rented out, borrowed in small doses at a time, never to be owned completely, no matter what price you’re willing to pay for it. ",
+          "They’ve bet everything on me – their time and energy and savings – and this is what I have to show for it. Sunk costs. A failed investment.",
+          "And me learning over time that potential was in itself such an abstract term, tossed around recklessly, that more often than not it simply meant you didn’t live up to the idea somebody else had of you.",
+          "I thought sacrifice was a good thing, that it proved you were determined, dedicated. But there are some things I have to keep for myself. Like, my integrity. Like, my dignity. My sanity."
+        ],
+        title: "I Am Not Jessica Chen by Ann Liang",
+        cover: "images/quotes-grid/jessica_chen.jpg",
+        url: "https://www.goodreads.com/book/show/61374793-i-am-not-jessica-chen"
+      },
+      {
+        quotes: [
+          "Every photo of a victim is an act of resistance against the perpetrators’ attempts to erase victims’ existence and conceal the crime of mass murder.",
+          "Human nature avoids revisiting trauma, even at the cost of forgetting.",
+          "It was impossible to know whether, in the end, the documents would be worth the money they had cost, the stamps and signatures that covered the pages, and the time and tears expended to acquire them.",
+          "I remembered communications research that insists there is no such thing as an innocent bystander; there are only people who cede their authority to more outspoke influencers."
+        ],
+        title: "The Unanswered Letter by Faris Cassell",
+        cover: "images/quotes-grid/the_unanswered_letter.jpg",
+        url: "https://www.goodreads.com/book/show/46212118-the-unanswered-letter"
+      },
+      {
+        quotes: [
+          "You know, for someone named Pepper, you’re pretty salty about losing.",
+          "How to Suck at Confessing to the Girl You Like that You’ve Secretly Been Messaging Her on a Platform You Created, Then Convince Her It’s Not as Shady as It Sounds: a terrible novel, written by me.",
+          "I find out approximately two seconds later that it is very difficult to commit to a heated storm out of a bakery with a giant baguette in your hand.",
+          "It’s like I’ve been watching the shadow of some moon cross over me my whole life, and now it’s just full eclipse.",
+          "So I can still let it define me without letting it own me.",
+          "How can a person even know who they are if they don’t know what they want?"
+        ],
+        title: "Tweet Cute by Emma Lord",
+        cover: "images/quotes-grid/tweet_cute.jpg",
+        url: "https://www.goodreads.com/book/show/45045129-tweet-cute"
+      },
+      {
+        quotes: [
+          "Why? Why hadn’t I allowed myself  to teeter in the uncharted territory between yes and no? Black and white? What was so scary about gray?",
+          "You guys have chemistry. Chemistry isn’t always good. Chemistry kills people. Didn’t you watch Breaking Bad?",
+          "Well if you’re going to be letting people down anyway, why not go with what you want? You’re the only one who has to live with your choice, after all.",
+          "I don’t think about work when I’m not getting paid to.",
+          "I want to confide in them about this cocktail of insecurity and imposter syndrome I’ve been chugging since I was a preteen.",
+        ],
+        title: "Bingsu for Two by Sujin Witherspoon",
+        cover: "images/quotes-grid/bingsu_for_two.jpg",
+        url: "https://www.goodreads.com/book/show/196038712-bingsu-for-two"
+      },
+      {
+        quotes: [
+          "It’s true that people do the most desperate things for those they love. Some might even call it a sacrifice. But I think it might be the other way around. I think it would be a terrible sacrifice to do nothing.",
+          "Who are you to say what my fate is – if I am to fail, or if I am to succeed? My fate is not yours to decide. My fate belongs to me.",
+          "After all, not all storytellers are grandmothers, but all grandmothers are storytellers.",
+          "My eldest brother, Sung, says trust is earned, that to give someone your trust is to give them the knife to wound you. But Joon would counter that trust is faith, that to trust someone is to believe in the goodness of people and in the world that shapes them.",
+          "Sometimes, only through a story can a truth be heard.",
+          "Who are you to judge their hopes? At least they have them. What do you have? A sword that cuts. Words filled with hate."
+        ],
+        title: "The Girl Who Fell Beneath the Sea by Axie Oh",
+        cover: "images/quotes-grid/girl_who_fell.jpg",
+        url: "https://www.goodreads.com/book/show/56978100-the-girl-who-fell-beneath-the-sea"
+      },
+      {
+        quotes: [
+          "More often than not, our shame isn't deserved. It worms its way into our minds, infecting us with guilt for things that were never our fault.",
+          "I learned long ago that the horrors we hide within our minds are never destroyed - we merely save them for later. They will always find their way to surface.",
+          "Apathy is the only weapon I have against their attacks. Somehow, I know it would be a thousand times worse if I let them all see how much they've broken me.",
+          "“I should have been stronger”, I argue.“You were a child. That kind of strength should never have been required of you.”",
+          "I can't lose the only thing I'm good at. The only thing I'm good for. Without this, who am I?"
+        ],
+        title: "Heir of Illusion by Madeline Miller",
+        cover: "images/quotes-grid/heir_of_illusion.jpg",
+        url: "https://www.goodreads.com/book/show/239015366-heir-of-illusion"
+      },
+      {
+        quotes: [
+          "He creates words to blanket his evil. This is an old trick. If you want to get away with lying, first change the language.",
+          "The only real truth of war is that no one should engage in it.",
+          "To keep harmony, there are things you might not even say, even if you know them to be accurate. It is, technically, an act of deceit. It is also an act of love. The two are more connected than you think.",
+          "For me, true love is easy. It's the kind where you do not lie to yourself.",
+          "Would a man be protected from a wolf simply by walking alongside it?",
+          "But just because you forget about a lie does not mean it forgets about you."
+        ],
+        title: "The Little Liar by Mitch Albom",
+        cover: "images/quotes-grid/the_little_liar.jpg",
+        url: "https://www.goodreads.com/book/show/112975105-the-little-liar"
+      },
+      {
+        quotes: [
+          "There is a rhythm to moving through the world alone. You discover what you can and cannot live without, the simple necessities and small joys that define a life. Not food, not shelter, not the basic things a body needs – those are, for her, a luxury – but the things that keep you sane. That bring you joy. That make life bearable.",
+          "Books, she has found, are a way to live a thousand lives – or to find strength in a very long one.",
+          "They were so caught up in their grief, they mourned him before he was even dead. There’s no way to un-know the fact that someone is dying. It eats away all the normal, and leaves something wrong and rotten in its place.",
+          "Blink and you’re twenty-eight, and everyone else is now a mile down the road, and you’re still trying to find it, and the irony is hardly lost on you that in wanting to live, to learn, to find yourself, you’ve gotten lost.",
+          "He is all restless energy, and urgent need, and there isn’t enough time, and he knows of course that there will never be. That time always ends a second before you’re ready. That life is the minutes you want minus one."
+        ],
+        title: "The Invisible Life of Addie Larue by V.E. Schwab",
+        cover: "images/quotes-grid/addie_larue.jpg",
+        url: "https://www.goodreads.com/book/show/50623864-the-invisible-life-of-addie-larue"
+      },
+      {
+        quotes: [
+          "It is a matter of simple mathematics. Simply mathematics’ is an oxymoron.",
+          "While I agree that women suffer and we should rage about it – “Suffrage”",
+          "Alice Dearlove defied even his ability to find a suitable quote from literature; he could only say she was e<sup>(i&pi;)</sup> + 1 = 0 in feminine physical form.",
+          "The ‘impasto technique’ just means the artist ate a lot of spaghetti while he painted, do you know nothing?!",
+          "Besides, lying next to a man in bed is the same as standing next to him in a public room, only horizontal."
+        ],
+        title: "The Secret Service of Tea and Treason by India Holton",
+        cover: "images/quotes-grid/secret_service.jpg",
+        url: "https://www.goodreads.com/book/show/61100920-the-secret-service-of-tea-and-treason"
+      },
+      {
+        quotes: [
+          "No, you’re not weak at all. If something costs more than it’s worth, you let it go. If anybody dares make you feel bad for it, then screw them.",
+          "Maybe I don’t have to be the outcast, or the model – I can just focus on being a good person surrounded by other good people in beautiful places, and that’s more than enough.",
+          "And my heart swells at the silly, simple, human fact that when we stumble upon something beautiful, our first instinct is to show it to people we love. It’s what we do with pretty seashells on a beach, a radiant sunset, a rare bird flitting through the trees, a herd of wild horses grazing in the countryside. Look, we say, saving these little pieces of beauty for each other.",
+          "Because was it really love if it ate away at you? If it felt like trying to hold on to a fanged creature while it sucked the blood from your hand?",
+          "On a bad day, books offer a language for your pain, and on a good day, books remind you just how precious your life is.",
+          "Everyone loves an underdog, so long as they ultimately win in the end."
+        ],
+        title: "Never Thought I'd End Up Here by Ann Liang",
+        cover: "images/quotes-grid/never_thought.jpg",
+        url: "https://www.goodreads.com/book/show/216879705-never-thought-i-d-end-up-here"
+      },
+      {
+        quotes: [
+          "The textbook was wrong. The most beautiful arrangement of words to ever exist. It’s like someone’s injected sunlight directly into my veins.",
+          "I note quietly that this is the twenty-fifth time he’s brought up the word Harvard in the past ten minutes. If Harvard were a ghost, he would have successfully summoned it back to life by now.",
+          "Most of the time when you’re talking to people – teachers, especially – you sound like you’re in an advertisement for organic fruit juice. It’s overly cheery.",
+          "I haven’t felt that enthusiastic about life since I finished color-coding all my history notes.",
+          "“I’m busy too,” I say immediately. “Very busy. My whole morning has been one urgent matter after another. In fact, I came here straight from my workout-” “That does sound like a very urgent matter. I fear the nation’s economy would collapse if you didn’t get your daily push-ups in.”",
+          "“It’s not about his dignity,” I tell him, articulating each and every word. “It’s about mine. By insulting my competition, you’re insulting me.”",
+          "How do you know if your blood pressure is rising because of how annoying they are, or how attractive you find them? If your hands are shaking because you’re holding back from strangling them, or kissing them?"
+        ],
+        title: "I Hope This Doesn't Find You by Ann Liang",
+        cover: "images/quotes-grid/I_hope.jpg",
+        url: "https://www.goodreads.com/book/show/124932739-i-hope-this-doesn-t-find-you"
+      },
+      // add more tiles if you want
+    ];
+
+    const grid = document.querySelector('.grid');
+
+    data.forEach(item => {
+      const tile = document.createElement('div');
+      tile.className = "bg-white shadow rounded-lg flex flex-col items-center justify-between p-4 relative h-96";
+
+      let slideIndex = 0;
+
+      const content = document.createElement('div');
+      content.className = "flex flex-col items-center justify-center text-center h-full w-full px-2";
+
+      const textEl = document.createElement('p');
+      textEl.className = "text-lg font-medium";
+      textEl.textContent = item.quotes[slideIndex];
+      content.appendChild(textEl);
+
+      const arrows = document.createElement('div');
+      arrows.className = "absolute bottom-4 flex gap-6";
+
+      const prev = document.createElement('button');
+      prev.textContent = "←";
+      prev.className = "text-2xl font-bold";
+      const next = document.createElement('button');
+      next.textContent = "→";
+      next.className = "text-2xl font-bold";
+
+      arrows.appendChild(prev);
+      arrows.appendChild(next);
+
+      const updateSlide = () => {
+        if (slideIndex < item.quotes.length) {
+          textEl.innerHTML = `<p class='text-lg font-medium'>${item.quotes[slideIndex]}</p>`;
+        } else {
+          textEl.innerHTML = `
+            <a href='${item.url}' target='_blank' class='flex flex-col items-center'>
+              <img src='${item.cover}' class='h-40 object-contain mb-2'>
+              <span class='text-lg font-semibold mt-2'>${item.title}</span>
+            </a>
+          `;
+        }
+      };
+
+      prev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        slideIndex = (slideIndex - 1 + (item.quotes.length + 1)) % (item.quotes.length + 1);
+        updateSlide();
+      });
+
+      next.addEventListener('click', (e) => {
+        e.stopPropagation();
+        slideIndex = (slideIndex + 1) % (item.quotes.length + 1);
+        updateSlide();
+      });
+
+      tile.appendChild(content);
+      tile.appendChild(arrows);
+
+      grid.appendChild(tile);
+    });
+    
+    document.getElementById('enter-btn').addEventListener('click', () => {
+    document.getElementById('spoiler-overlay').style.display = 'none';
+  });
+  </script>
+
+</body>
+</html>

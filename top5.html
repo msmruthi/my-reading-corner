@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!-- Website design layout created with the help of ChatGPT (OpenAI)-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Top 5 Recommendations</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .slider-container {
+      position: relative;
+      overflow: hidden;
+    }
+    .slider {
+      display: flex;
+      transition: transform 0.4s ease-in-out;
+    }
+    .slide {
+      min-width: 100%;
+      text-align: center;
+    }
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 9999px;
+    }
+    .arrow-left { left: 1rem; }
+    .arrow-right { right: 1rem; }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-yellow-200 to-red-300 min-h-screen flex flex-col items-center justify-center p-6">
+
+  <h1 class="text-3xl font-bold mb-6">Smruthi's Top 5!</h1>
+
+  <div class="flex gap-4 mb-6">
+    <button class="category-btn px-4 py-2 bg-pink-500 text-white rounded-xl" data-category="romance">Top 5 Romance Recs</button>
+    <button class="category-btn px-4 py-2 bg-orange-500 text-white rounded-xl" data-category="fantasy">Top 5 Fantasy Recs</button>
+    <button class="category-btn px-4 py-2 bg-blue-500 text-white rounded-xl" data-category="ya">Top 5 YA Recs</button>
+  </div>
+  <div class="flex gap-4 mb-6">
+    <button class="category-btn px-4 py-2 bg-yellow-500 text-white rounded-xl" data-category="debut">Top 5 Author Debuts</button>
+    <button class="category-btn px-4 py-2 bg-green-500 text-white rounded-xl" data-category="FMC">Top 5 Female Leads</button>
+    <button class="category-btn px-4 py-2 bg-purple-500 text-white rounded-xl" data-category="crew">Top 5 Chaotic Crews</button>
+  </div>
+  <div class="flex gap-4 mb-6">
+    <button id = "quotes-btn" class="category-btn px-4 py-2 bg-gray-500 text-white rounded-xl">Try Something Different!</button>
+  </div>
+
+  <div class="slider-container w-full max-w-md bg-white rounded-2xl shadow-xl p-4">
+    <div class="slider" id="slider">
+      <!-- Slides will be injected dynamically -->
+    </div>
+    <button class="arrow arrow-left" onclick="prevSlide()">❮</button>
+    <button class="arrow arrow-right" onclick="nextSlide()">❯</button>
+  </div>
+
+  <div id="quotes-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl shadow-lg max-w-md w-full p-6 text-center">
+      <h2 class="text-2xl font-bold mb-4">📖 Favorite Lines</h2>
+      <p class="mb-6">Do you want to choose books based on my favorite lines? This may contain spoilers.</p>
+      <div class="flex justify-center gap-4">
+        <button id="modal-yes" class="bg-orange-500 text-white px-5 py-2 rounded-xl hover:bg-orange-600 font-semibold">
+          Yes
+        </button>
+        <button id="modal-no" class="bg-gray-300 text-black px-5 py-2 rounded-xl hover:bg-gray-400 font-semibold">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="fixed bottom-0 left-0 w-full bg-gray-800 text-white text-center text-sm p-2">
+    Book cover images are the property of their respective publishers and authors. 
+    All covers displayed here were sourced from 
+    <a href="https://www.goodreads.com/" target="_blank" class="underline hover:text-gray-700">Goodreads</a> 
+    for non-commercial, educational purposes.
+  </footer>
+
+  <script>
+    const data = {
+      romance: [
+        { title: 'The Friendship Fling by Georgia Stone', 
+          cover: 'images/Romance/the_friendship_fling.jpg',
+          url: 'https://www.goodreads.com/book/show/218680615-the-friendship-fling'},
+        { title: 'One Golden Summer by Carley Fortune', 
+          cover: 'images/Romance/one_golden_summer.jpg',
+          url:'https://www.goodreads.com/book/show/217245639-one-golden-summer' },
+        { title: 'The Ex Vows by Jessica Joyce', 
+          cover: 'images/Romance/ex_vows.jpg',
+          url: 'https://www.goodreads.com/book/show/199926331-the-ex-vows' },
+        { title: 'Out on a Limb by Hannah Bonam-Young', 
+          cover: 'images/Romance/out_on_a_limb.jpg',
+          url: 'https://www.goodreads.com/book/show/124950295-out-on-a-limb' },
+        { title: 'Tangled Up in You by Christina Lauren', 
+          cover: 'images/Romance/tangled.jpg',
+          url: 'https://www.goodreads.com/book/show/197577021-tangled-up-in-you' },
+      ],
+      fantasy: [
+        { title: 'The Invisible Life of Addie Larue by V.E. Schwab', 
+          cover: 'images/Fantasy/addie_larue.jpg',
+          url: 'https://www.goodreads.com/book/show/50623864-the-invisible-life-of-addie-larue' },
+        { title: 'The Cruel Prince by Holly Black', 
+          cover: 'images/Fantasy/cruel_prince.jpg',
+          url: 'https://www.goodreads.com/book/show/26032825-the-cruel-prince' },
+        { title: 'Heir of Illusion by Madeline Taylor', 
+          cover: 'images/Fantasy/heir_of_illusion.jpg',
+          url: 'https://www.goodreads.com/book/show/239015366-heir-of-illusion' },
+        { title: 'Red Winter: The Complete Trilogy by Annette Marie', 
+          cover: 'images/Fantasy/redwinter.jpg',
+          url: 'https://www.goodreads.com/book/show/40884349-red-winter' },
+        { title: 'The Wisteria Society of Lady Scoundrels by India Holton', 
+          cover: 'images/Fantasy/wisteria.jpg',
+          url: 'https://www.goodreads.com/book/show/55502861-the-wisteria-society-of-lady-scoundrels' },   
+      ],
+      ya: [
+        { title: "I Hope This Doesn't Find You by Ann Liang", 
+          cover: 'images/YA/I_hope.jpg',
+          url: 'https://www.goodreads.com/book/show/124932739-i-hope-this-doesn-t-find-you' },
+        { title: 'Check & Mate by Ali Hazelwood',
+          cover: 'images/YA/check&mate.jpg',
+          url: 'https://www.goodreads.com/book/show/60683957-check-mate' },
+        { title: 'Bingsu for Two by Sujin Witherspoon',
+          cover: 'images/YA/bingsu_for_two.jpg',
+          url: 'https://www.goodreads.com/book/show/196038712-bingsu-for-two' },
+        { title: 'Tweet Cute by Emma Lord', 
+          cover: 'images/YA/tweet_cute.jpg',
+          url: 'https://www.goodreads.com/book/show/45045129-tweet-cute'},
+        { title: 'I Am Not Jessica Chen by Ann Liang', 
+          cover: 'images/YA/jessica_chen.jpg',
+          url: 'https://www.goodreads.com/book/show/61374793-i-am-not-jessica-chen'},
+      ],
+      debut: [
+        { title: 'The Unanswered Letter by Faris Casell', 
+          cover: 'images/Debut/the_unanswered_letter.jpg',
+          url: 'https://www.goodreads.com/book/show/46212118-the-unanswered-letter' },
+        { title: "The Friendship Fling by Georgia Stone", 
+          cover: 'images/Debut/the_friendship_fling.jpg',
+          url: 'https://www.goodreads.com/book/show/218680615-the-friendship-fling' },
+        { title: 'A Burning by Megha Majumdar', 
+          cover: 'images/Debut/a_burning.jpg',
+          url: 'https://www.goodreads.com/book/show/51792100-a-burning' },
+        { title: 'Bingsu for Two by Sujin Witherspoon', 
+          cover: 'images/Debut/bingsu_for_two.jpg',
+          url: 'https://www.goodreads.com/book/show/196038712-bingsu-for-two' },
+        { title: 'Heir of Illusion by Madeline Taylor', 
+          cover: 'images/Debut/heir_of_illusion.jpg',
+          url: 'https://www.goodreads.com/book/show/239015366-heir-of-illusion' },
+      ],
+      FMC: [
+        { title: "Emi from Red Winter Trilogy by Annette Marie", 
+          cover: 'images/FMC/redwinter.jpg',
+          url: 'https://www.goodreads.com/book/show/40884349-red-winter' },
+        { title: 'Mallory from Check & Mate by Ali Hazelwood', 
+          cover: 'images/FMC/Check&Mate.jpg',
+          url: 'https://www.goodreads.com/book/show/60683957-check-mate' },
+        { title: 'Gus from The Benevolent Society of Ill-Mannered Ladies by Alison Goodman',
+          cover: 'images/FMC/benevolent.jpg',
+          url: 'https://www.goodreads.com/book/show/62313333-the-benevolent-society-of-ill-mannered-ladies' },
+        { title: 'Cecilia from The Wisteria Society of Lady Scoundrels by India Holton', 
+          cover: 'images/FMC/wisteria.jpg',
+          url: 'https://www.goodreads.com/book/show/55502861-the-wisteria-society-of-lady-scoundrels' },
+        { title: 'Jenna from I Am Not Jessica Chen by Ann Liang', 
+          cover: 'images/FMC/jessica_chen.jpg',
+          url: 'https://www.goodreads.com/book/show/61374793-i-am-not-jessica-chen' },
+      ],
+      crew: [
+        { title: "The Dead Guy Next Door by Lucy Score", 
+          cover: 'images/Crew/riley_thorn.jpg',
+          url: 'https://www.goodreads.com/book/show/219287759-the-dead-guy-next-door' },
+        { title: 'The Wisteria Society of Lady Scoundrels by India Holton', 
+          cover: 'images/Crew/wisteria.jpg',
+          url: 'https://www.goodreads.com/book/show/55502861-the-wisteria-society-of-lady-scoundrels' },
+        { title: 'The League of Gentlewomen Witches by India Holton', 
+          cover: 'images/Crew/witches.jpg',
+          url: 'https://www.goodreads.com/book/show/58395042-the-league-of-gentlewomen-witches' },
+        { title: 'Bingsu for Two by Sujin Witherspoon',
+          cover: 'images/Crew/bingsu_for_two.jpg',
+          description: 'A heartwarming story about love and friendship.',
+          url: 'https://www.goodreads.com/book/show/196038712-bingsu-for-two' },
+        { title: 'The Benevolent Society of Ill-Mannered Ladies by Alison Goodman', 
+          cover: 'images/Crew/benevolent.jpg',
+          url: 'https://www.goodreads.com/book/show/62313333-the-benevolent-society-of-ill-mannered-ladies' },
+      ]
+    };
+
+    let currentCategory = 'romance';
+    let currentIndex = 0;
+
+    function loadSlides(category) {
+      currentCategory = category;
+      currentIndex = 0;
+      const slider = document.getElementById('slider');
+      slider.innerHTML = '';
+      data[category].forEach(book => {
+        const slide = document.createElement('div');
+        slide.className = 'slide flex flex-col items-center';
+        slide.innerHTML = `
+          <a href="${book.url}" target="_blank" rel="noopener noreferrer">
+            <img src="${book.cover}" alt="${book.title}" class="h-72 w-full object-contain mb-2">
+          </a>
+          <p class="text-lg font-medium text-center break-words w-full">${book.title}</p>
+        `;
+        slider.appendChild(slide);
+      });
+      updateSlider();
+    }
+
+    function updateSlider() {
+      const slider = document.getElementById('slider');
+      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function nextSlide() {
+      if (currentIndex < data[currentCategory].length - 1) {
+        currentIndex++;
+        updateSlider();
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+      }
+    }
+
+    document.querySelectorAll('.category-btn').forEach(btn => {
+      btn.addEventListener('click', () => loadSlides(btn.dataset.category));
+    });
+
+    loadSlides(currentCategory);
+
+    const modal = document.getElementById('quotes-modal');
+  const openBtn = document.getElementById('quotes-btn');
+  const yesBtn = document.getElementById('modal-yes');
+  const noBtn = document.getElementById('modal-no');
+
+  openBtn.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+  });
+
+  yesBtn.addEventListener('click', () => {
+    window.location.href = 'quotes.html'; // replace with your quotes grid URL
+  });
+
+  noBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+
+  // Optional: Close modal if clicking outside the box
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+    }
+  });
+  </script>
+
+</body>
+</html>
