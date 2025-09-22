@@ -4,3 +4,5 @@ This repository contains HTML files for a website dedicated to my hobby of readi
 * top5.html is the page with my book recommendations across different genres/themes
 * quotes.html is the page with some of my favourite lines from books I have read
 * All the images of the book covers used are downloaded from Goodreads and are the property of their respective publishers and authors
+
+Note - the github pages site is best viewed on laptop or desktop for now. I am still working on adapting the site to a phone display.
